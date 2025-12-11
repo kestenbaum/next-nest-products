@@ -3,9 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 dotenv.config();
-
 
 @Module({
   imports: [
@@ -13,7 +12,7 @@ dotenv.config();
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.HOST,
-      port: Number(process.env.PORT),
+      port: Number(process.env.DB_PORT),
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
