@@ -1,7 +1,7 @@
 import React from 'react';
 import { sizeConfig } from "@/config/size.config";
 import { productService } from "@/api/service/products";
-import Cart from "@/components/Cart";
+import Card from "@/components/Card";
 
 const Page = async () => {
     const products = await productService.getAllProducts();
@@ -15,7 +15,7 @@ const Page = async () => {
                     style={{paddingTop: `calc(20px + ${sizeConfig.headerSize}px)`}}
                 >Products</div>
                 <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"}>
-                    {products.map(product => <Cart
+                    {products.map(product => <Card
                         key={product.id}
                         price={product.price}
                         title={product.title}

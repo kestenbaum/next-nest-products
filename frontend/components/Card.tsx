@@ -6,7 +6,7 @@ interface ProductProps extends IProduct {
     link: string;
 }
 
-const Cart: FC<ProductProps> = ({ title, price, link }) => {
+const Card: FC<ProductProps> = ({ title, price, link }) => {
     return (
         <div className="w-full p-5 rounded-2xl bg-white shadow-lg hover:shadow-xl transition-shadow border border-gray-100 dark:bg-gray-800">
             <h2 className="text-white text-lg font-semibold mb-2">
@@ -29,4 +29,4 @@ const Cart: FC<ProductProps> = ({ title, price, link }) => {
     );
 };
 
-export default Cart;
+export default Card;
