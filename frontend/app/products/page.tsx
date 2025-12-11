@@ -1,7 +1,7 @@
 import React from 'react';
 import { sizeConfig } from "@/config/size.config";
 import { productService } from "@/api/service/products";
-import Link from "next/link";
+import Cart from "@/components/Cart";
 
 const Page = async () => {
     const products = await productService.getAllProducts();
@@ -14,12 +14,15 @@ const Page = async () => {
                     className="text-white"
                     style={{paddingTop: `calc(20px + ${sizeConfig.headerSize}px)`}}
                 >Products</div>
-                <div>
-                    {products.map(product => <li
-                        key={product.id}>
-                        <p>{product.title}</p>
-                        <Link className="text-blue-600 hover:text-blue-800" href={`/products/${product.id}`}>To product</Link>
-                    </li>)}
+                <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"}>
+                    {products.map(product => <Cart
+                        key={product.id}
+                        price={product.price}
+                        title={product.title}
+                        description={product.description}
+                        id={product.id}
+                        link={`/products/${product.id}`}
+                    />)}
                 </div>
             </div>
         </section>

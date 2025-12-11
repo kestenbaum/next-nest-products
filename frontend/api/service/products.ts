@@ -1,11 +1,6 @@
 import { AxiosInstance } from "axios";
 import { apiInstance } from "@/api";
-
-interface IProduct {
-    id: number;
-    title: string;
-    description: string;
-}
+import { IProduct } from "@/types/product";
 
 class ProductService {
     private axios: AxiosInstance = apiInstance;

@@ -2,12 +2,7 @@ import React, { FC } from 'react';
 import { sizeConfig } from "@/config/size.config";
 import { productService } from "@/api/service/products";
 import { notFound } from "next/navigation";
-
-interface IProduct {
-    id: number;
-    title: string;
-    description: string;
-}
+import { IProduct } from "@/types/product";
 
 interface Props {
     params: {
