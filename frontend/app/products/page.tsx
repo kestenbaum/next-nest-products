@@ -1,6 +1,7 @@
 import React from 'react';
 import { sizeConfig } from "@/config/size.config";
 import { productService } from "@/api/service/products";
+import Link from "next/link";
 
 const Page = async () => {
     const products = await productService.getAllProducts();
@@ -14,7 +15,11 @@ const Page = async () => {
                     style={{paddingTop: `calc(20px + ${sizeConfig.headerSize}px)`}}
                 >Products</div>
                 <div>
-                    {products.map(product => <li key={product.id}>{product.title}</li>)}
+                    {products.map(product => <li
+                        key={product.id}>
+                        <p>{product.title}</p>
+                        <Link className="text-blue-600 hover:text-blue-800" href={`/products/${product.id}`}>To product</Link>
+                    </li>)}
                 </div>
             </div>
         </section>
