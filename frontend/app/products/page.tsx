@@ -11,7 +11,7 @@ const Page = async () => {
         >
             <div className="max-w-5xl mx-auto px-3.5">
                 <div
-                    className="text-white"
+                    className="text-white mb-5"
                     style={{paddingTop: `calc(20px + ${sizeConfig.headerSize}px)`}}
                 >Products</div>
                 <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"}>
