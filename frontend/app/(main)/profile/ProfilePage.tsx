@@ -1,8 +1,14 @@
-import React from 'react';
+"use client"
+import React, { FC } from 'react';
 import { sizeConfig } from "@/config/size.config";
-import Image from "next/image";
+import { IUser } from "@/types/user";
 
-const Page = () => {
+const ProfilePage: FC<IUser> = ({ id, name, email, registrationDate, avatarUrl }) => {
+    const formattedDate = new Date(registrationDate).toLocaleDateString('de-DE', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
     return (
         <section
             className="min-h-screen bg-white dark:bg-gray-800 py-10"
@@ -29,10 +35,10 @@ const Page = () => {
 
                             <div>
                                 <p className="text-xl font-semibold text-gray-900 dark:text-white">
-                                    User Name
+                                    {name}
                                 </p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    User ID: 12345
+                                    User ID: {id}
                                 </p>
                             </div>
                         </div>
@@ -67,19 +73,19 @@ const Page = () => {
                             <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
                                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                                    John Doe
+                                    {name}
                                 </dd>
                             </div>
                             <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
                                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Email Address</dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                                    john.doe@example.com
+                                    {email}
                                 </dd>
                             </div>
                             <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
                                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Registration Date</dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                                    December 10, 2025
+                                    {formattedDate}
                                 </dd>
                             </div>
                         </dl>
@@ -127,4 +133,4 @@ const Page = () => {
     );
 };
 
-export default Page;
+export default ProfilePage;

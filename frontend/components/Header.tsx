@@ -14,13 +14,21 @@ const Header = () => {
                         <Link href="/products" className="text-fuchsia-50 hover:text-fuchsia-300">Product</Link>
                         <Link href="/profile" className="text-fuchsia-50 hover:text-fuchsia-300">Profile</Link>
                         {auth
-                            ? <Link
-                                className={"text-fuchsia-50 hover:text-fuchsia-300"}
-                                href="/"
-                                onClick={() => {setAuth(false)}}
-                            >
-                                Logout
-                        </Link>
+                            ? <menu className="flex gap-2.5">
+                                <Link
+                                    className={"text-fuchsia-50 hover:text-fuchsia-300"}
+                                    href="/"
+                                    onClick={() => {setAuth(false)}}
+                                >
+                                    Logout
+                                </Link>
+                                <Link
+                                    className={"text-fuchsia-50 hover:text-fuchsia-300"}
+                                    href="/cart"
+                                >
+                                    Cart
+                                </Link>
+                            </menu>
                             : <menu className="flex gap-2.5">
                                 <Link href="/login" className="text-fuchsia-50 hover:text-fuchsia-300">Login</Link>
                                 <Link href="/register" className="text-fuchsia-50 hover:text-fuchsia-300">Register</Link>
