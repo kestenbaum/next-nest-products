@@ -7,6 +7,11 @@ import {
 } from 'typeorm';
 import { Cart } from '../../cart/entities/cart.entity';
 
+export enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user',
+}
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -23,7 +28,8 @@ export class User {
 
   @Column({
     type: 'varchar',
-    default: 'user',
+    enum: UserRole,
+    default: UserRole.USER,
     nullable: false,
   })
   role: string;
