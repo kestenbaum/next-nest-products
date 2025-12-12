@@ -21,7 +21,11 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+    default: 'user',
+    nullable: false,
+  })
   role: string;
 
   @OneToOne(() => Cart, (cart) => cart.user, { cascade: true })

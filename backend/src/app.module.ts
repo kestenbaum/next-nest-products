@@ -4,10 +4,14 @@ import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
+import { UserModule } from './user/user.module';
+import { CartModule } from './cart/cart.module';
 dotenv.config();
 
 @Module({
   imports: [
+    CartModule,
+    UserModule,
     ProductModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
