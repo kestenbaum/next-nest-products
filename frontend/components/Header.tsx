@@ -7,8 +7,10 @@ const Header = () => {
             <div className="max-w-5xl mx-auto px-3.5">
                 <div className="flex items-center justify-between h-[60px]">
                     <Link href="/" className="text-fuchsia-100 hover:text-fuchsia-300">Home</Link>
-                    <menu>
+                    <menu className="flex gap-2.5">
                         <Link href="/products" className="text-fuchsia-50 hover:text-fuchsia-300">Product</Link>
+                        <Link href="/profile" className="text-fuchsia-50 hover:text-fuchsia-300">Profile</Link>
+                        <Link href="/auth" className="text-fuchsia-50 hover:text-fuchsia-300">Auth</Link>
                     </menu>
                 </div>
             </div>
