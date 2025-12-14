@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -21,6 +22,12 @@ export class UserController {
   @Get()
   findAll() {
     return this.userService.getAllUsers();
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('profile')
+  getProfile(@Request() req: any) {
+    return this.userService.getUserById(req.user.id);
   }
 
   @Get(':id')
