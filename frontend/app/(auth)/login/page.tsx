@@ -1,7 +1,27 @@
-import React from 'react';
-import { sizeConfig } from "@/config/size.config";
+'use client'
+import React, { FormEvent, useState } from 'react';
+import { authService } from "@/api/service/auth";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/authContext";
+
 
 const Page = () => {
+    const router = useRouter();
+    const [user, setUser] = useState({ email: '', password: '' });
+    const { login } = useAuth();
+
+    const handleLogin = async (e: FormEvent) => {
+        e.preventDefault();
+        try {
+            const data = await authService.login(user);
+            login(data.access_token);
+
+            router.push("/profile");
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <section
             className="h-screen bg-white dark:bg-gray-800 flex items-center justify-center"
@@ -27,6 +47,8 @@ const Page = () => {
                                 id="email"
                                 name="email"
                                 placeholder="you@example.com"
+                                value={user.email}
+                                onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
                                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
                                 required
                             />
@@ -44,6 +66,8 @@ const Page = () => {
                                 id="password"
                                 name="password"
                                 placeholder="••••••••"
+                                value={user.password}
+                                onChange={(e) => setUser({ ...user, [e.target.name]: e.target.value })}
                                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
                                 required
                             />
@@ -51,6 +75,7 @@ const Page = () => {
 
                         <button
                             type="submit"
+                            onClick={handleLogin}
                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700"
                         >
                             Login

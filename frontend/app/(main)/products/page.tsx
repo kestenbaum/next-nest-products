@@ -1,10 +1,26 @@
-import React from 'react';
+'use client'
+
+import React, { useEffect, useState } from 'react';
 import { sizeConfig } from "@/config/size.config";
 import { productService } from "@/api/service/products";
 import Card from "@/components/Card";
+import { IProduct } from "@/types/product";
 
-const Page = async () => {
-    const products = await productService.getAllProducts();
+const Page =  () => {
+    const [data, setData] = useState<IProduct[]>([]);
+
+    useEffect(() => {
+       const fetch = async () => {
+           try {
+               const data = await productService.getAllProducts()
+               setData(data);
+           } catch (e) {
+               console.error(e);
+           }
+       }
+        fetch()
+    }, [])
+
     return (
         <section
             className="h-screen bg-white dark:bg-gray-800"
@@ -15,7 +31,7 @@ const Page = async () => {
                     style={{paddingTop: `calc(20px + ${sizeConfig.headerSize}px)`}}
                 >Products</div>
                 <div className={"grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"}>
-                    {products.map(product => <Card
+                    {data && data.map(product => <Card
                         key={product.id}
                         price={product.price}
                         title={product.title}

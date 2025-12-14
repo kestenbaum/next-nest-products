@@ -1,7 +1,7 @@
+'use client'
 import React, { FC } from 'react';
 import Link from "next/link";
 import { IProduct } from "@/types/product";
-import Image from "next/image";
 
 interface ProductProps extends IProduct {
     link: string;

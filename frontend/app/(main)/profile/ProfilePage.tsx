@@ -1,14 +1,23 @@
 "use client"
-import React, { FC } from 'react';
+import React, { useEffect, useState } from 'react';
 import { sizeConfig } from "@/config/size.config";
-import { IUser } from "@/types/user";
+import { IUserProfile } from "@/types/user";
+import { userService } from "@/api/service/user";
+import { useRouter } from "next/navigation";
 
-const ProfilePage: FC<IUser> = ({ id, name, email, registrationDate, avatarUrl }) => {
-    const formattedDate = new Date(registrationDate).toLocaleDateString('de-DE', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    });
+const ProfilePage = () => {
+    const [user, setUser] = useState<IUserProfile | null>(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        const token = localStorage.getItem("access_token");
+        if (!token) router.push("/login");
+
+        userService.getUser()
+            .then(data => setUser(data))
+            .catch(err => console.error(err));
+    }, [])
+
     return (
         <section
             className="min-h-screen bg-white dark:bg-gray-800 py-10"
@@ -35,10 +44,10 @@ const ProfilePage: FC<IUser> = ({ id, name, email, registrationDate, avatarUrl }
 
                             <div>
                                 <p className="text-xl font-semibold text-gray-900 dark:text-white">
-                                    {name}
+                                    {user?.name}
                                 </p>
                                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                                    User ID: {id}
+                                    User ID: {user?.id}
                                 </p>
                             </div>
                         </div>
@@ -73,19 +82,13 @@ const ProfilePage: FC<IUser> = ({ id, name, email, registrationDate, avatarUrl }
                             <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
                                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                                    {name}
+                                    {user?.name}
                                 </dd>
                             </div>
                             <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
                                 <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Email Address</dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                                    {email}
-                                </dd>
-                            </div>
-                            <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
-                                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Registration Date</dt>
-                                <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
-                                    {formattedDate}
+                                    {user?.email}
                                 </dd>
                             </div>
                         </dl>

@@ -1,7 +1,14 @@
-export interface IUser {
-    id: number,
-    name: string,
-    email: string,
-    registrationDate: string,
-    avatarUrl: string
+export interface IUserProfile {
+    id: string;
+    email: string;
+    name: string;
+    role: string;
+    cartId: string;
+}
+
+export interface IUserToken {
+    email: string;
+    sub: number | string;
+    role: string;
+    exp: number;
 }
