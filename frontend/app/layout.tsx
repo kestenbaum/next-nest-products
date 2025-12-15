@@ -3,6 +3,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { AuthProvider } from "@/context/authContext";
 
+//todo http cookie in nest js
+
 export const metadata: Metadata = {
   title: "Create Next App Products",
   description: "product crud application",

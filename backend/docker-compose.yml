@@ -3,13 +3,15 @@ services:
     image: postgres:16-alpine
     restart: always
     environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASS}
-      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: crud
     ports:
-      - "5433:5432"
+      - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - next-nest-products
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB" ]
       interval: 5s
@@ -25,18 +27,24 @@ services:
       - "4000:4000"
 
     environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      DB_USERNAME: ${DB_USERNAME}
-      DB_PASS: ${DB_PASS}
-      DB_NAME: ${DB_NAME}
+      HOST: host.docker.internal
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASS: root
+      DB_NAME: crud
 
-      JWT_SECRET: ${JWT_SECRET}
-      PORT: ${PORT}
+      JWT_SECRET: superSecretKeyForProd
+      PORT: 4000
 
     depends_on:
-      db:
-        condition: service_healthy
+      - db
+    networks:
+        - next-nest-products
+
 
 volumes:
   postgres_data:
+
+networks:
+  next-nest-products:
+    driver: bridge

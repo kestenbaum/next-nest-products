@@ -16,6 +16,7 @@ const Page: FC<Props> = async ({ params }) => {
 
     try {
         currentProduct = await productService.getProduct(Number(slug));
+        console.log(currentProduct);
     } catch (error) {
         console.log(error);
         notFound()
