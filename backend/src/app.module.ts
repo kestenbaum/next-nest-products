@@ -3,10 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import * as dotenv from 'dotenv';
 import { UserModule } from './user/user.module';
 import { CartModule } from './cart/cart.module';
 import { AuthModule } from './auth/auth.module';
+import dotenv from 'dotenv';
 dotenv.config();
 
 @Module({
@@ -24,6 +24,8 @@ dotenv.config();
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
+      retryAttempts: 10,
+      retryDelay: 3000,
     }),
     AuthModule,
   ],
