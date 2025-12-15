@@ -1,6 +1,32 @@
-import React from 'react';
+'use client'
+import React, { useState } from 'react';
+import { useAuth } from "@/context/authContext";
+import { UserRegisterData } from "@/types/user";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+    const { register } = useAuth();
+    const router = useRouter();
+    const [user, setUser] = useState<UserRegisterData>({
+        email: '',
+        password: '',
+        name: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUser({ ...user, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await register(user);
+            router.push("/profile");
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <section
             className="h-screen bg-white dark:bg-gray-800 flex items-center justify-center"
@@ -13,7 +39,7 @@ const Page = () => {
                         Register
                     </h2>
 
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="mb-4">
                             <label
                                 htmlFor="name"
@@ -26,6 +52,8 @@ const Page = () => {
                                 id="name"
                                 name="name"
                                 placeholder="Your name"
+                                value={user.name}
+                                onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
                                 required
                             />
@@ -43,6 +71,8 @@ const Page = () => {
                                 id="email"
                                 name="email"
                                 placeholder="you@example.com"
+                                value={user.email}
+                                onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
                                 required
                             />
@@ -60,6 +90,8 @@ const Page = () => {
                                 id="password"
                                 name="password"
                                 placeholder="••••••••"
+                                value={user.password}
+                                onChange={handleChange}
                                 className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
                                 required
                             />

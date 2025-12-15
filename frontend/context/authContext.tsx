@@ -1,11 +1,14 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { UserRegister } from "@/types/user";
+import { authService } from "@/api/service/auth";
 
 interface AuthContextType {
     isAuth: boolean;
     login: (token: string) => void;
     logout: () => void;
+    register: (data: UserRegister) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -30,8 +33,19 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsAuth(false);
     };
 
+    const register = async (data: UserRegister) => {
+        try {
+            const response = await authService.register(data);
+            if (response.access_token) {
+                login(response.access_token)
+            }
+        } catch (error) {
+           throw error;
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuth, login, logout }}>
+        <AuthContext.Provider value={{ isAuth, login, logout, register }}>
             {children}
         </AuthContext.Provider>
 );
