@@ -10,7 +10,7 @@ class ProductService {
         return response.data;
     }
 
-    public async getProduct(id: number): Promise<IProduct> {
+    public async getProduct(id: string): Promise<IProduct> {
         const response = await this.axios.get(`/products/${id}`);
         return response.data;
     }

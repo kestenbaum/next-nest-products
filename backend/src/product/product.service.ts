@@ -21,11 +21,11 @@ export class ProductService {
     return this.productRepository.find();
   }
 
-  async findOne(id: number) {
+  async findOne(id: string) {
     return this.productRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, updateProductDto: UpdateProductDto) {
+  async update(id: string, updateProductDto: UpdateProductDto) {
     const existingProduct = await this.productRepository.findOne({
       where: { id },
     });
@@ -36,7 +36,7 @@ export class ProductService {
     return this.productRepository.save(existingProduct);
   }
 
-  async remove(id: number) {
+  async remove(id: string) {
     return this.productRepository.delete(id);
   }
 }

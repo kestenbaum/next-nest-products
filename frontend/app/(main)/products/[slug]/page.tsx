@@ -15,7 +15,7 @@ const Page: FC<Props> = async ({ params }) => {
     let currentProduct: IProduct;
 
     try {
-        currentProduct = await productService.getProduct(Number(slug));
+        currentProduct = await productService.getProduct(slug);
         console.log(currentProduct);
     } catch (error) {
         console.log(error);
