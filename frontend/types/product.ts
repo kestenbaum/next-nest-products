@@ -6,3 +6,4 @@ export interface IProduct {
 }
 
 export type ProductProps = Omit<IProduct, "id">;
+export type UpdateProductProps = Partial<ProductProps>;

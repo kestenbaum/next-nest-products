@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
 import { apiInstance } from "@/api";
-import { IProduct, ProductProps } from "@/types/product";
+import { IProduct, ProductProps, UpdateProductProps } from "@/types/product";
 
 class ProductService {
     private axios: AxiosInstance = apiInstance;
@@ -22,6 +22,11 @@ class ProductService {
 
     public async createProduct(data: ProductProps): Promise<ProductProps> {
         const response = await this.axios.post(`/products`, data);
+        return response.data;
+    }
+
+    public async updateProduct(id: string, data: IProduct): Promise<IProduct> {
+        const response = await this.axios.patch(`/products/${id}`, data);
         return response.data;
     }
 }
