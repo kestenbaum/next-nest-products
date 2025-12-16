@@ -1,27 +1,11 @@
 'use client'
-import React, { FC, useEffect, useState } from 'react';
+import React from 'react';
 import { sizeConfig } from "@/config/size.config";
-import { IProduct } from "@/types/product";
+import { useGetItemById } from "@/lib/hooks/useGetItemById";
 import { productService } from "@/api/service/products";
 
-type Props = {
-    id: string;
-}
-
-const Product:FC<Props> = ({ id })=> {
-    const [product, setProduct] = useState<IProduct>()
-
-    useEffect(() => {
-        const fetchProductById = async () => {
-            try {
-                const item  = await productService.getProduct(id)
-                setProduct(item)
-            } catch (e) {
-                console.error(e)
-            }
-        }
-        fetchProductById()
-    }, []);
+const Product = (id: string)=> {
+    const { date } = useGetItemById(id, productService.deleteProductById);
 
     return (
         <section className="min-h-screen bg-white dark:bg-gray-800 py-10">
@@ -30,24 +14,24 @@ const Product:FC<Props> = ({ id })=> {
                     className="text-2xl font-semibold text-gray-900 dark:text-white mb-8"
                     style={{ paddingTop: `calc(20px + ${sizeConfig.headerSize}px)` }}
                 >
-                    {product?.title}
+                    {date?.title}
                 </h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="w-full h-80 bg-gray-100 dark:bg-gray-700 rounded-2xl shadow-inner flex items-center justify-center">
-                <span className="text-gray-500 dark:text-gray-300">
-                    No Image
-                </span>
+                        <span className="text-gray-500 dark:text-gray-300">
+                            No Image
+                        </span>
                     </div>
                     <div className="flex flex-col justify-between">
                         <div>
                             <p className="text-gray-700 dark:text-gray-300 text-lg mb-4">
-                                {product?.description}
+                                {date?.description}
                             </p>
 
                             <p className="flex gap-1">
                                 <span className={"text-white"}>Price:</span>
-                                <span className={"text-fuchsia-200"}>{product?.price}$</span>
+                                <span className={"text-fuchsia-200"}>{date?.price}$</span>
                             </p>
                         </div>
 
