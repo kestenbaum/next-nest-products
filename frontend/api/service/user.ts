@@ -9,6 +9,16 @@ export class UserService {
         const response = await this.axios.get<IUserProfile>("/user/profile");
         return response.data;
     }
+
+    public async isAdmin () {
+        try {
+            const user = await this.getUser();
+            return user.role === "admin";
+        } catch (e) {
+            console.error(e);
+            return false;
+        }
+    }
 }
 
 export const userService = new UserService();

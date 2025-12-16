@@ -1,12 +1,27 @@
 "use client"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { useAuth } from "@/context/authContext";
+import { userService } from "@/api/service/user";
 
 const Header = () => {
     const { isAuth, logout } = useAuth();
+    const [isAuthorized, setIsAuthorized] = useState<boolean>(false);
     const router = useRouter();
+
+    useEffect(() => {
+        const check = async () => {
+            setIsAuthorized(false);
+            try {
+                const admin = await userService.isAdmin();
+                if (admin) setIsAuthorized(true);
+            } catch (e) {
+                console.error(e);
+            }
+        }
+        check();
+    }, [isAuth])
 
     const handleLogout = () => {
         logout();
@@ -34,6 +49,9 @@ const Header = () => {
                                 <Link href="/cart" className="text-fuchsia-50 hover:text-fuchsia-300">
                                     Cart
                                 </Link>
+                                {isAuthorized && <Link href="/panel" className="text-fuchsia-50 hover:text-fuchsia-300">
+		                                Panel
+                                </Link>}
                                 <button
                                     onClick={handleLogout}
                                     className="text-red-400 hover:text-red-200 ml-2"

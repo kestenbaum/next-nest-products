@@ -80,15 +80,21 @@ const ProfilePage = () => {
                         </h3>
                         <dl className="divide-y divide-gray-200 dark:divide-gray-600">
                             <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
-                                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</dt>
+                                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Full Name: </dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
                                     {user?.name}
                                 </dd>
                             </div>
                             <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
-                                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Email Address</dt>
+                                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Email Address: </dt>
                                 <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
                                     {user?.email}
+                                </dd>
+                            </div>
+                            <div className="py-3 sm:grid sm:grid-cols-3 sm:gap-4">
+                                <dt className="text-sm font-medium text-gray-500 dark:text-gray-400">Role: </dt>
+                                <dd className="mt-1 text-sm text-gray-900 dark:text-white sm:mt-0 sm:col-span-2">
+                                    {user?.role}
                                 </dd>
                             </div>
                         </dl>

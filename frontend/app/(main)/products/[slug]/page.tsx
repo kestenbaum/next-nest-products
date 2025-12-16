@@ -11,7 +11,6 @@ interface Props {
 const Page: FC<Props> =  async ({ params }) => {
     const { slug } = await params;
 
-
     return <Product id={slug} />;
 };
 
