@@ -1,6 +1,6 @@
 "use client"
 import React, { FormEvent, useEffect, useState } from 'react';
-import { IProduct, ProductProps } from "@/types/product";
+import { IProduct, ProductProps } from "@/lib/types/product";
 import { productService } from "@/api/service/products";
 import { sizeConfig } from "@/config/size.config";
 import ConfirmModal from "@/components/ui/ConfirmModal";

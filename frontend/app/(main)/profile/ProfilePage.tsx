@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { sizeConfig } from "@/config/size.config";
-import { IUserProfile } from "@/types/user";
+import { IUserProfile } from "@/lib/types/user";
 import { userService } from "@/api/service/user";
 import { useRouter } from "next/navigation";
 

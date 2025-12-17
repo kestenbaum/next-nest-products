@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { useAuth } from "@/context/authContext";
-import { UserRegisterData } from "@/types/user";
+import { UserRegisterData } from "@/lib/types/user";
 import { useRouter } from "next/navigation";
 
 const Page = () => {

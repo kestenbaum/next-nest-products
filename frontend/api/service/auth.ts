@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
 import { apiInstance } from "@/api";
-import { UserRegister } from "@/types/user";
+import { UserRegister } from "@/lib/types/user";
 
 interface ILoginRequest {
     email: string;

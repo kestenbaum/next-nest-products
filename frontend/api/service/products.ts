@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
 import { apiInstance } from "@/api";
-import { IProduct, ProductProps } from "@/types/product";
+import { IProduct, ProductProps } from "@/lib/types/product";
 
 class ProductService {
     private axios: AxiosInstance = apiInstance;

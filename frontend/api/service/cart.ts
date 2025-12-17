@@ -1,22 +1,6 @@
 import { AxiosInstance } from "axios";
 import { apiInstance } from "@/api";
-
-export interface ICartItem {
-    id: string;
-    quantity: number;
-    product: {
-        id: string;
-        name: string;
-        price: number;
-        imageUrl?: string;
-    };
-}
-
-export interface ICart {
-    id: string;
-    total: number;
-    items: ICartItem[];
-}
+import { ICart } from "@/lib/types/cart";
 
 export class Cart {
     private axios: AxiosInstance = apiInstance;
