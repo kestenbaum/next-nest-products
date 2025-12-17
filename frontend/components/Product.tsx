@@ -4,8 +4,12 @@ import { sizeConfig } from "@/config/size.config";
 import { useGetItemById } from "@/lib/hooks/useGetItemById";
 import { productService } from "@/api/service/products";
 
-const Product = (id: string)=> {
-    const { date } = useGetItemById(id, productService.deleteProductById);
+interface Props {
+    id: string;
+}
+
+const Product = ({id}: Props)=> {
+    const { data, loading, error } = useGetItemById(id, (itemId) => productService.getProduct(itemId));
 
     return (
         <section className="min-h-screen bg-white dark:bg-gray-800 py-10">
@@ -14,7 +18,7 @@ const Product = (id: string)=> {
                     className="text-2xl font-semibold text-gray-900 dark:text-white mb-8"
                     style={{ paddingTop: `calc(20px + ${sizeConfig.headerSize}px)` }}
                 >
-                    {date?.title}
+                    {data?.title}
                 </h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -26,12 +30,12 @@ const Product = (id: string)=> {
                     <div className="flex flex-col justify-between">
                         <div>
                             <p className="text-gray-700 dark:text-gray-300 text-lg mb-4">
-                                {date?.description}
+                                {data?.description}
                             </p>
 
                             <p className="flex gap-1">
                                 <span className={"text-white"}>Price:</span>
-                                <span className={"text-fuchsia-200"}>{date?.price}$</span>
+                                <span className={"text-fuchsia-200"}>{data?.price}$</span>
                             </p>
                         </div>
 

@@ -4,20 +4,20 @@ export const useGetItemById = <T,>(
     id: string,
     serviceFn: (id: string) => Promise<T>,
 ) => {
-    const [date, setDate] = useState<T | null>(null);
+    const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
         if (!id) {
-            setDate(null);
+            setData(null);
             return;
         }
 
         const fetchItem = async () => {
             try {
                 const item = await serviceFn(id);
-                setDate(item);
+                setData(item);
             } catch (e) {
                 const error = ( e instanceof Error ) ? e : null;
                 setError(error)
@@ -28,5 +28,5 @@ export const useGetItemById = <T,>(
         fetchItem();
     }, [id, serviceFn]);
 
-    return { date, loading, error };
+    return { data, loading, error };
 }
