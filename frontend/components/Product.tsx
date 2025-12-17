@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Product = ({id}: Props)=> {
-    const { data, loading, error } = useGetItemById(id, (itemId) => productService.getProduct(itemId));
+    const { data } = useGetItemById(id, (itemId) => productService.getProduct(itemId));
 
     return (
         <section className="min-h-screen bg-white dark:bg-gray-800 py-10">
