@@ -11,7 +11,7 @@ import { CartItem } from './cart-item.entity';
 @Entity()
 export class Cart {
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @OneToOne(() => User, (user) => user.cart)
   user: User;
