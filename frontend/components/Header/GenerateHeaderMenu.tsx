@@ -12,23 +12,31 @@ interface Props {
 
 const GenerateHeaderMenu: FC<Props> = ({ isAuth, isReady, handleLogout, isAdmin }) => {
     return (
-        <div className="flex gap-4 items-center">
-            <Link href="/products" className="text-fuchsia-50 hover:text-fuchsia-300">
+        <div className="flex items-center gap-6">
+            <Link
+                href="/products"
+                className="text-sm font-medium text-slate-600 transition-colors duration-200 hover:text-indigo-600"
+            >
                 Products
             </Link>
-            {isReady ? (
-                isAuth ? (
-                    <AuthNavigation
-                        handleLogout={handleLogout}
-                        isAdmin={isAdmin}
-                        isAuth={isAuth}
-                    />
+
+            <div className="flex items-center">
+                {isReady ? (
+                    isAuth ? (
+                        <AuthNavigation
+                            handleLogout={handleLogout}
+                            isAdmin={isAdmin}
+                            isAuth={isAuth}
+                        />
+                    ) : (
+                        <div className="flex items-center gap-3">
+                            <GuestNavigation />
+                        </div>
+                    )
                 ) : (
-                    <GuestNavigation />
-                )
-            ) : (
-                <span className="text-gray-400">Loading...</span>
-            )}
+                    <div className="flex h-5 w-5 animate-spin rounded-full border-2 border-slate-200 border-t-indigo-600" />
+                )}
+            </div>
         </div>
     );
 };
