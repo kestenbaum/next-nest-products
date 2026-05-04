@@ -5,47 +5,46 @@ import { IProduct } from "@/lib/types/product";
 
 interface ProductProps extends IProduct {
     link: string;
-    img?: string;
+    image?: string;
 }
 
-const Card: FC<ProductProps> = ({ title, price, link, img }) => {
+const Card: FC<ProductProps> = ({ title, price, link, image }) => {
     return (
-        <div className="max-w-xs w-full">
-            <div className="bg-gray-100 dark:bg-gray-700 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:scale-[1.02]">
-                <a href={link || "#"} aria-label={`View details for ${ title|| 'Product'}`}>
-                    <div className="relative h-48 w-full">
-                        <img
-                            src={img || "https://via.placeholder.com/400x300?text=Product+Image"}
-                            alt={title || "Product Image"}
-                            className="w-full h-full object-cover"
-                            width={150}
-                            height={150}
-                        />
-                    </div>
-                </a>
+        <div className="group relative w-full overflow-hidden rounded-2xl bg-white border border-slate-100 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/10">
+            <div className="relative aspect-square w-full overflow-hidden bg-slate-100">
+                <img
+                    src={image || "https://images.unsplash.com/photo-1560393464-5c69a73c5770?q=80&w=800"}
+                    alt={title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/20 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+            </div>
 
-                <div className="p-4 flex flex-col justify-between">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 truncate" title={title || "Product Name"}>
-                        {title || "Stylish Product Name"}
+            <div className="p-5">
+                <div className="mb-2 flex items-start justify-between">
+                    <h3 className="text-lg font-semibold tracking-tight text-slate-800 line-clamp-1">
+                        {title || "Untitled Product"}
                     </h3>
-
-                    <div className="flex items-center justify-between mb-4">
-                        <p className="text-2xl font-bold text-green-600 dark:text-green-400">
-                            ${price || "99.99"}
-                        </p>
-                    </div>
-
-                    <Link
-                        href={link || "#"}
-                        className="block text-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 rounded-lg transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700"
-                    >
-                        View Details
-                    </Link>
                 </div>
 
+                <div className="flex items-baseline gap-1">
+                    <span className="text-2xl font-bold text-slate-900">${price}</span>
+                    <span className="text-sm text-slate-400 font-medium">USD</span>
+                </div>
+
+                <div className="mt-5">
+                    <Link
+                        href={link || "#"}
+                        className="flex items-center justify-center gap-2 w-full rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-indigo-600 active:scale-95"
+                    >
+                        View Details
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </Link>
+                </div>
             </div>
         </div>
-
     );
 };
 
