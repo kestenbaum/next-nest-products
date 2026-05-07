@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { useAuth } from "@/context/authContext";
 import { UserRegisterData } from "@/lib/types/user";
 import { useRouter } from "next/navigation";
@@ -14,7 +15,7 @@ const Page = () => {
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setUser({ ...user, [e.target.name]: e.target.value})
+        setUser({ ...user, [e.target.name]: e.target.value })
     }
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -28,89 +29,100 @@ const Page = () => {
     }
 
     return (
-        <section
-            className="h-screen bg-white dark:bg-gray-800 flex items-center justify-center"
-        >
-            <div className="max-w-5xl mx-auto px-3.5">
-                <div className="bg-gray-100 dark:bg-gray-700 p-8 rounded-lg shadow-xl">
-                    <h2
-                        className="text-2xl font-bold text-gray-900 dark:text-white text-center"
-                    >
-                        Register
-                    </h2>
-
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-4">
-                            <label
-                                htmlFor="name"
-                                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            >
-                                Name
-                            </label>
-                            <input
-                                type="text"
-                                id="name"
-                                name="name"
-                                placeholder="Your name"
-                                value={user.name}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
-                                required
-                            />
+        <section className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300 flex items-center justify-center py-8">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full">
+                <div className="max-w-md mx-auto">
+                    <div className="bg-slate-50 dark:bg-slate-800/50 p-8 rounded-2xl shadow-xl border border-slate-200 dark:border-slate-700">
+                        <div className="text-center mb-8">
+                            <h1 className="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+                                Create Account
+                            </h1>
+                            <p className="text-slate-600 dark:text-slate-400">
+                                Join us and start shopping
+                            </p>
                         </div>
 
-                        <div className="mb-4">
-                            <label
-                                htmlFor="email"
-                                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
+                        <form onSubmit={handleSubmit} className="space-y-6">
+                            <div>
+                                <label
+                                    htmlFor="name"
+                                    className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"
+                                >
+                                    Full Name
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="Your full name"
+                                    value={user.name}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:text-white transition-colors duration-200"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    htmlFor="email"
+                                    className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"
+                                >
+                                    Email Address
+                                </label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    placeholder="you@example.com"
+                                    value={user.email}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:text-white transition-colors duration-200"
+                                    required
+                                />
+                            </div>
+
+                            <div>
+                                <label
+                                    htmlFor="password"
+                                    className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"
+                                >
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="••••••••"
+                                    value={user.password}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-3 border border-slate-300 dark:border-slate-600 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-slate-700 dark:text-white transition-colors duration-200"
+                                    required
+                                />
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center"
                             >
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                name="email"
-                                placeholder="you@example.com"
-                                value={user.email}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
-                                required
-                            />
+                                Create Account
+                                <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
+                            </button>
+                        </form>
+
+                        <div className="mt-8 text-center">
+                            <p className="text-sm text-slate-600 dark:text-slate-400">
+                                Already have an account?{" "}
+                                <Link
+                                    href="/login"
+                                    className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-semibold transition-colors duration-200"
+                                >
+                                    Sign in
+                                </Link>
+                            </p>
                         </div>
-
-                        <div className="mb-6">
-                            <label
-                                htmlFor="password"
-                                className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
-                            >
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="••••••••"
-                                value={user.password}
-                                onChange={handleChange}
-                                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:text-white"
-                                required
-                            />
-                        </div>
-
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md shadow-lg transition duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-700"
-                        >
-                            Register
-                        </button>
-                    </form>
-
-                    <p className="mt-4 text-center text-sm text-gray-600 dark:text-gray-400">
-                        Have you Acc?
-                        <a href="/login" className="text-blue-600 hover:text-blue-500 ml-1">
-                            Login
-                        </a>
-                    </p>
+                    </div>
                 </div>
             </div>
         </section>

@@ -1,6 +1,6 @@
 import { AxiosInstance } from "axios";
 import { apiInstance } from "@/api";
-import { UserRegister } from "@/lib/types/user";
+import { UserRegisterData, UserRegister } from "@/lib/types/user";
 
 interface ILoginRequest {
     email: string;
@@ -19,7 +19,7 @@ export class AuthService {
         return response.data;
     }
 
-    public async register(data: UserRegister): Promise<UserRegister> {
+    public async register(data: UserRegisterData): Promise<UserRegister> {
         const response = await this.axios.post<UserRegister>('/auth/register', data);
         return response.data
     }

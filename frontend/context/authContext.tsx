@@ -1,14 +1,14 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { UserRegister } from "@/lib/types/user";
+import { UserRegisterData } from "@/lib/types/user";
 import { authService } from "@/api/service/auth";
 
 interface AuthContextType {
     isAuth: boolean;
     login: (token: string) => void;
     logout: () => void;
-    register: (data: UserRegister) => Promise<void>;
+    register: (data: UserRegisterData) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         if (token) {
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setIsAuth(true);
         }
     }, []);
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setIsAuth(false);
     };
 
-    const register = async (data: UserRegister) => {
+    const register = async (data: UserRegisterData) => {
         try {
             const response = await authService.register(data);
             if (response.access_token) {

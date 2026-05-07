@@ -16,16 +16,16 @@ const ConfirmModal: FC<ConfirmModalProps> = ({isOpen, onClose, onConfirm, title 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
             <div
-                className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
+                className="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity cursor-pointer"
                 onClick={!isLoading ? onClose : undefined}
             ></div>
 
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl z-10 w-full max-w-md p-6 transform transition-all scale-100 relative">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+            <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl z-10 w-full max-w-md p-6 transform transition-all scale-100 relative">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
                     {title}
                 </h3>
 
-                <div className="text-gray-500 dark:text-gray-300 mb-6">
+                <div className="text-slate-600 dark:text-slate-400 mb-6">
                     {children}
                 </div>
 
@@ -33,7 +33,7 @@ const ConfirmModal: FC<ConfirmModalProps> = ({isOpen, onClose, onConfirm, title 
                     <button
                         onClick={onClose}
                         disabled={isLoading}
-                        className="px-4 py-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
+                        className="px-4 py-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors disabled:opacity-50 cursor-pointer"
                     >
                         Cancel
                     </button>
@@ -42,7 +42,7 @@ const ConfirmModal: FC<ConfirmModalProps> = ({isOpen, onClose, onConfirm, title 
                         onClick={onConfirm}
                         disabled={isLoading}
                         className={`
-                            px-4 py-2 rounded-lg text-white font-medium transition-colors flex items-center gap-2
+                            px-4 py-2 rounded-lg text-white font-medium transition-colors flex items-center gap-2 cursor-pointer
                             ${danger
                             ? "bg-red-500 hover:bg-red-600"
                             : "bg-blue-600 hover:bg-blue-700"
