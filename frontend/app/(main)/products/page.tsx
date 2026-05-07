@@ -9,7 +9,7 @@ const Page = () => {
 
     return (
         <section className="min-h-screen bg-white dark:bg-slate-950 transition-colors duration-300">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <div className="max-w-6xl mx-auto px-4 pb-4 sm:px-6">
                 <Title>Products</Title>
 
                 {loading && (
