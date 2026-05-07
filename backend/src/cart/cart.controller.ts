@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
+  Patch,
   Post,
   Req,
   UseGuards,
@@ -24,6 +27,11 @@ export class CartController {
     return await this.cartService.getCart(req.user.id);
   }
 
+  @Get('count')
+  async getCartItemCount(@Req() req: RequestWithUser) {
+    return await this.cartService.getCartItemCount(req.user.id);
+  }
+
   @Post('add')
   async addToCart(
     @Req() req: RequestWithUser,
@@ -31,8 +39,34 @@ export class CartController {
   ) {
     return await this.cartService.addToCart(
       req.user.id,
-      body.quantity,
       body.productId,
+      body.quantity,
     );
+  }
+
+  @Patch('update/:itemId')
+  async updateCartItem(
+    @Req() req: RequestWithUser,
+    @Param('itemId') itemId: string,
+    @Body() body: { quantity: number },
+  ) {
+    return await this.cartService.updateCartItem(
+      req.user.id,
+      itemId,
+      body.quantity,
+    );
+  }
+
+  @Delete('item/:itemId')
+  async removeCartItem(
+    @Req() req: RequestWithUser,
+    @Param('itemId') itemId: string,
+  ) {
+    return await this.cartService.removeCartItem(req.user.id, itemId);
+  }
+
+  @Delete('clear')
+  async clearCart(@Req() req: RequestWithUser) {
+    return await this.cartService.clearCart(req.user.id);
   }
 }

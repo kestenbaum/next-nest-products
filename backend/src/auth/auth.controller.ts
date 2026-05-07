@@ -9,7 +9,8 @@ export class AuthController {
 
   @UseGuards(AuthGuard('local'))
   @Post('login')
-  async login(@Request() req: any): Promise<any> {
+  login(@Request() req: any): any {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     return this.authService.login(req.user);
   }
 
